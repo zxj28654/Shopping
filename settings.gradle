@@ -1,0 +1,4 @@
+rootProject.name='Shopping'
+include ':app'
+include ':mylibrary'
+include ':mvplibrary'

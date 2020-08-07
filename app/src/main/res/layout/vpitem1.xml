@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView app:cardCornerRadius="@dimen/dp_8"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_200"
+    android:elevation="@dimen/dp_1"
+    app:cardMaxElevation="@dimen/dp_1"
+    android:layout_height="@dimen/dp_160"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="@dimen/dp_199"
+        android:orientation="vertical"
+        android:layout_height="@dimen/dp_159">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/iv1s"
+            android:layout_height="@dimen/dp_110"/>
+        <TextView
+            android:layout_marginTop="@dimen/dp_2"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="爱生活"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="@dimen/dp_1"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:hint="有品有范有时尚"
+            android:textSize="@dimen/sp_12"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

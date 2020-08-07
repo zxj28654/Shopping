@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        applicationId "com.example.shopping"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':mylibrary')
+    implementation project(path: ':mvplibrary')
+  //  implementation 'com.android.support:design:30.+'
+   // implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+    api 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
+    api 'com.tencent.bugly:crashreport:latest.release'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    api 'com.tencent.bugly:nativecrashreport:latest.release'
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+
+
+// 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
+    api 'com.umeng.umsdk:common:9.1.0'
+    api 'com.umeng.umsdk:asms:1.1.3'// asms包依赖(必选)
+    api 'com.umeng.umsdk:crash:0.0.4' // native crash包依赖(必选)
+//<uses-sdk android:minSdkVersion="23"></uses-sdk>
+
+    //底部导航
+
+    api 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
+    //api 'com.github.shts:TriangleLabelView:1.1.2'
+
+//eventbus
+    api 'org.greenrobot:eventbus:3.1.1'
+//自动刷新
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+
+    api 'com.youth.banner:banner:1.4.10'
+
+    //标签
+   // api   'com.github.poqiao:BeveLabelView:1.0.3'
+    api 'com.github.shts:TriangleLabelView:1.1.2'
+    //画廊
+    api 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
+}
