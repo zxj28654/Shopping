@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ClassificationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:textSize="@dimen/dp_35"
-        android:layout_height="match_parent"
-        android:text="f分类" />
+        android:id="@+id/toobar_class"
+        android:background="#03A9F4"
+        android:layout_height="@dimen/dp_43">
+            <TextView
+                android:layout_width="match_parent"
+                android:textSize="@dimen/sp_20"
+                android:gravity="center"
+                android:text="商品分类类"
+                android:textColor="#eeeeee"
+                android:layout_height="match_parent"/>
+    </androidx.appcompat.widget.Toolbar>
 
-</FrameLayout>
+    <q.rorbin.verticaltablayout.VerticalTabLayout
+        android:layout_width="@dimen/dp_100"
+        android:id="@+id/tab_ver"
+        app:tab_height="@dimen/dp_35"
+        app:tab_mode="scrollable"
+        android:layout_below="@id/toobar_class"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

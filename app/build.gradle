@@ -82,4 +82,5 @@ dependencies {
     api 'com.github.shts:TriangleLabelView:1.1.2'
     //画廊
     api 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
+    api 'q.rorbin:VerticalTabLayout:1.2.5'
 }

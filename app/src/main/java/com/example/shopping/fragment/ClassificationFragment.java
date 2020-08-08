@@ -1,20 +1,28 @@
 package com.example.shopping.fragment;
 
-import android.os.Bundle;
-
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.example.mvplibrary.base.BaseMvpFragment;
 import com.example.shopping.R;
+import com.example.shopping.classification.ClassBeanData;
+import com.example.shopping.classification.ClassPresenter;
+import com.example.shopping.classification.ClassView;
+
+import butterknife.BindView;
+import q.rorbin.verticaltablayout.VerticalTabLayout;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClassificationFragment extends Fragment {
+public class ClassificationFragment extends BaseMvpFragment<ClassView, ClassPresenter> implements ClassView{
+
+    @BindView(R.id.toobar_class)
+    Toolbar toobarClass;
+    @BindView(R.id.tab_ver)
+    VerticalTabLayout tabVer;
+
 
     public ClassificationFragment() {
         // Required empty public constructor
@@ -22,9 +30,31 @@ public class ClassificationFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_classification, container, false);
+    protected void initData() {
+        super.initData();
+
+        if (mPresenter!=null){
+            mPresenter.getDataBean();
+        }
+    }
+
+    @Override
+    protected ClassPresenter initPresenter() {
+        return new ClassPresenter();
+    }
+
+    @Override
+    protected int initLayoutId() {
+        return R.layout.fragment_classification;
+    }
+
+    @Override
+    public void setData(ClassBeanData classBeanData) {
+
+    }
+
+    @Override
+    public void showToast(String string) {
+
     }
 }
