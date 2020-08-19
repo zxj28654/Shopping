@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.classfragment.ClassFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/iv_cassBa"
+        android:src="@drawable/category_banner"
+        android:layout_height="@dimen/dp_110"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/vt_Hort"
+        android:text="热卖热荐"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_20"
+        android:layout_height="wrap_content"/>
+
+    <!-- TODO: Update blank fragment layout -->
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:id="@+id/rcy"
+       android:layout_height="match_parent"/>
+
+
+
+</LinearLayout>

@@ -20,7 +20,8 @@ public class ShopApplication extends Application {
     public void onCreate() {
         super.onCreate();
         HttpGlobaConfig.getInstance()
-                //.setBaseUrl("http://apie.ergedd.com/")
+                 .setBaseUrl("http://169.254.189.205:8080/kotlin/")
+              //  .setBaseUrl("http://apie.ergedd.com/")
                 .setTimeOut(HttpConstant.TIME_OUT)
                 .setShowLog(true)
                 .setTimeUnit(HttpConstant.TIME_UNIT)

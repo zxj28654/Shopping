@@ -1,40 +1,55 @@
 package com.example.shopping.classification;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClassBeanData {
-    private int id;
-    private String categoryName;
-    private int parentId;
+    private List<Datas> data;
 
-    public int getId() {
-        return id;
+    public List<Datas> getList() {
+        return data;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setList(List<Datas> list) {
+        data = list;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
+    private class Datas {
+        private int id;
+        private String categoryName;
+        private int parentId;
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
+        public int getId() {
+            return id;
+        }
 
-    public int getParentId() {
-        return parentId;
-    }
+        public void setId(int id) {
+            this.id = id;
+        }
 
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
-    }
+        public String getCategoryName() {
+            return categoryName;
+        }
 
-    @Override
-    public String toString() {
-        return "ClassBeanData{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
-                ", parentId=" + parentId +
-                '}';
+        public void setCategoryName(String categoryName) {
+            this.categoryName = categoryName;
+        }
+
+        public int getParentId() {
+            return parentId;
+        }
+
+        public void setParentId(int parentId) {
+            this.parentId = parentId;
+        }
+
+        @Override
+        public String toString() {
+            return "ClassBeanData{" +
+                    "id=" + id +
+                    ", categoryName='" + categoryName + '\'' +
+                    ", parentId=" + parentId +
+                    '}';
+        }
     }
 }

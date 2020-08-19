@@ -1,6 +1,7 @@
 package com.example.shopping.fragment;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,11 +12,13 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.shopping.HomeConstant;
 import com.example.shopping.R;
 import com.example.shopping.adapter.RcyApater;
@@ -61,6 +64,12 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+           getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         initVIew(view);
         return view;
     }
@@ -155,7 +164,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         String img= (String) path;
-                        Glide.with(getActivity()).load(img).into(imageView);
+                        Glide.with(getActivity()).load(img)
+                              //  .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(imageView);
                     }
                 })
                 .setBannerAnimation(Transformer.Accordion)

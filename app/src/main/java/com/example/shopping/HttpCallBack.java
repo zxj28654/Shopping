@@ -6,13 +6,14 @@ import com.example.mylibrary.callback.BaseCallBack;
 import com.example.mylibrary.exception.ApiException;
 import com.example.shopping.bean.EegeddBean;
 import com.example.shopping.bean.Response;
+import com.example.shopping.classification.GoodsClassBeanParent;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 
 public abstract class HttpCallBack<T> extends BaseCallBack<T> {
    // Response response;
-    EegeddBean mEegeddBean;
+  /*  EegeddBean mEegeddBean;
     @Override
     protected T onConvert(String result) {
         T t=null;
@@ -21,7 +22,7 @@ public abstract class HttpCallBack<T> extends BaseCallBack<T> {
         JsonElement data = mEegeddBean.getData();
         boolean success = mEegeddBean.isSuccess();
         String errorMsg = mEegeddBean.getMessage();
-      /*  switch (errorCode) {
+      *//*  switch (errorCode) {
             case -1:
                 onError(errorMsg,errorCode);
                 break;
@@ -30,7 +31,7 @@ public abstract class HttpCallBack<T> extends BaseCallBack<T> {
                     t=convert(data);
                 }
                 break;
-        }*/
+        }*//*
 
       if (success){
           if (isCodeSuccess()) {
@@ -46,13 +47,46 @@ public abstract class HttpCallBack<T> extends BaseCallBack<T> {
 
     @Override
     public boolean isCodeSuccess() {
-       /* if (response != null) {
+       *//* if (response != null) {
             return response.getErrorCode() == 0;
-        }*/
+        }*//*
        if (mEegeddBean!=null){
            return mEegeddBean.isSuccess() == true;
        }
         return false;
     }
+*/
+   GoodsClassBeanParent mGoodsClassBeanParent;
+    @Override
+    protected T onConvert(String result) {
+        T t=null;
+        mGoodsClassBeanParent = new Gson().fromJson(result, GoodsClassBeanParent.class);
+        JsonElement data = mGoodsClassBeanParent.getData();
+        int status = mGoodsClassBeanParent.getStatus();
+        String errorMsg = mGoodsClassBeanParent.getMessage();
+        switch (status) {
+            case -1:
+                onError(errorMsg,status);
+                break;
+            default:
+                if (isCodeSuccess()) {
+                    t=convert(data);
+                }
+                break;
+        }
 
+
+        Log.i("111", "onConvert: "+t.toString() );
+        return t;
+    }
+
+
+    @Override
+    public boolean isCodeSuccess() {
+        if (mGoodsClassBeanParent != null) {
+            return mGoodsClassBeanParent.getStatus() == 0;
+        }
+
+        return false;
+    }
 }

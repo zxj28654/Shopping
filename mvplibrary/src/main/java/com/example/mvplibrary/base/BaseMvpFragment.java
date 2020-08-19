@@ -11,7 +11,10 @@ public abstract class BaseMvpFragment<V extends BaseView,P extends BasePresenter
         if(mPresenter!=null){
             mPresenter.attacthView((V) this);
         }
+        initView();
     }
+
+    protected abstract void initView();
 
     protected abstract P initPresenter();
 

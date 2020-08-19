@@ -5,5 +5,6 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="bai">#EEEEEE</color>
     <color name="lan">#03A9F4</color>
+    <color name="lans">#3CC0FB</color>
     <color name="common_white">@color/bai</color>
 </resources>

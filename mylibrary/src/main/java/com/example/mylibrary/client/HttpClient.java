@@ -91,9 +91,6 @@ public class HttpClient {
         addPramaers();
         //添加头信息
         addHeadrs();
-        if (HttpGlobaConfig.getInstance().getBaseUrl() != null) {
-            this.baseUrl = HttpGlobaConfig.getInstance().getBaseUrl();
-        }
         Observable observable = createObservable();
         HttpObserable httpObserable = new HttpObserable.Buidler(observable)
                 .setActivityEvent(activityEvent)
@@ -103,6 +100,7 @@ public class HttpClient {
         httpObserable.observer().subscribe(baseCallBack);
     }
 
+    //添加公共头信息
     private void addHeadrs() {
         if (headres == null) {
             headres = new HashMap<>();
@@ -112,6 +110,7 @@ public class HttpClient {
         }
     }
 
+    //添加公共请求参数
     private void addPramaers() {
         if (paramser == null) {
             paramser = new HashMap<>();
@@ -128,6 +127,7 @@ public class HttpClient {
         boolean hasBodyString = !TextUtils.isEmpty(jsonbody);
         RequestBody requestBody = null;
         if (hasBodyString) {
+            Log.e("liangxq", "createObservable: "+hasBodyString );
             String mediaType = isJson ? "application/json; charset=utf-8" : "text/plain;charset=utf-8";
             requestBody = RequestBody.create(okhttp3.MediaType.parse(mediaType), jsonbody);
         }
@@ -136,11 +136,14 @@ public class HttpClient {
             method = Method.POST;
         }
 
+        if(HttpGlobaConfig.getInstance().getBaseUrl()!=null){
+            this.baseUrl=HttpGlobaConfig.getInstance().getBaseUrl();
+        }
         if(HttpGlobaConfig.getInstance().getTimeOut()!=0){
             this.time=HttpGlobaConfig.getInstance().getTimeOut();
         }
         if(this.time==0){
-            this.time= HttpConstant.TIME_OUT;
+            this.time=HttpConstant.TIME_OUT;
         }
         if(HttpGlobaConfig.getInstance().getTimeUnit()!=null){
             this.timeUnit=HttpGlobaConfig.getInstance().getTimeUnit();
@@ -149,14 +152,13 @@ public class HttpClient {
         if(this.timeUnit==null){
             this.timeUnit=HttpConstant.TIME_UNIT;
         }
-        Log.e("111", "createObservable: " + baseUrl);
         ApiServer apiServer = HttpManager.getInstance().getRetrofit(baseUrl, time, timeUnit).create(ApiServer.class);
         switch (method) {
             case POST:
                 if (isJson) {
-                   apiServer.postjson(apiUrl, requestBody, headres);
+                    observable= apiServer.postjson(apiUrl, requestBody, headres);
                 } else {
-                    apiServer.post(apiUrl, paramser, headres);
+                    observable= apiServer.post(apiUrl, paramser, headres);
                 }
                 break;
             case GET:

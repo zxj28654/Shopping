@@ -12,11 +12,12 @@ android {
         versionName "1.0"
         ndk {
             // 设置支持的SO库架构
-            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'x86' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'//armeabi
         }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -43,8 +44,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':mylibrary')
     implementation project(path: ':mvplibrary')
-  //  implementation 'com.android.support:design:30.+'
-   // implementation 'com.github.bumptech.glide:glide:4.8.0'
+    // implementation project(path: ':libumengsharelogin')
+    //  implementation 'com.android.support:design:30.+'
+    // implementation 'com.github.bumptech.glide:glide:4.8.0'
 
     api 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
@@ -78,9 +80,12 @@ dependencies {
     api 'com.youth.banner:banner:1.4.10'
 
     //标签
-   // api   'com.github.poqiao:BeveLabelView:1.0.3'
+    // api   'com.github.poqiao:BeveLabelView:1.0.3'
     api 'com.github.shts:TriangleLabelView:1.1.2'
     //画廊
     api 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
     api 'q.rorbin:VerticalTabLayout:1.2.5'
+
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 }

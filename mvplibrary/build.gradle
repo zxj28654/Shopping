@@ -36,9 +36,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+
     /*RxLifecycle基础库*/
-    api 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
-    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
 
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'

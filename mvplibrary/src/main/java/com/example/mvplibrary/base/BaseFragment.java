@@ -10,13 +10,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.trello.rxlifecycle2.components.RxFragment;
+
+//import com.trello.rxlifecycle2.components.support.RxFragment
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public abstract class BaseFragment extends RxFragment{
+public abstract class BaseFragment extends RxFragment {
     public Activity mActivity;
     public Context context;
     private View rootView;

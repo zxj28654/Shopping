@@ -1,14 +1,25 @@
 package com.example.shopping;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -23,20 +34,39 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import java.util.ArrayList;
 
 
-public class MainActivity extends RxAppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
     private FrameLayout fl;
     private BottomNavigationBar buttonnavig;
     private BadgeItem badgeItem;
     private ArrayList<Fragment> mFragments;
     private FragmentManager fm;
+    private volatile int lastPosition;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initPmismmer();
+     /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }*/
         initView();
 
     }
+
+    private void initPmismmer() {
+        int i = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (i!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            },100);
+        }
+    }
+
 
     private void initView() {
 
@@ -71,19 +101,41 @@ public class MainActivity extends RxAppCompatActivity {
                     default:
                         break;
                     case 0:
+                        if (lastPosition!=0){
+                            hideFragment(lastPosition);
+                        }
                       showFragment(position);
+                      lastPosition=0;
+
                         break;
                     case 1:
+                        if (lastPosition!=1){
+                            hideFragment(lastPosition);
+                        }
                         showFragment(position);
+                        lastPosition=1;
+
                         break;
                     case 2:
+                        if (lastPosition!=2){
+                            hideFragment(lastPosition);
+                        }
                         showFragment(position);
+                        lastPosition=2;
                         break;
                     case 3:
+                        if (lastPosition!=3){
+                            hideFragment(lastPosition);
+                        }
                         showFragment(position);
+                        lastPosition=3;
                         break;
                     case 4:
+                        if (lastPosition!=4){
+                            hideFragment(lastPosition);
+                        }
                         showFragment(position);
+                        lastPosition=4;
                         break;
                 }
             }
@@ -91,49 +143,10 @@ public class MainActivity extends RxAppCompatActivity {
             @Override
             public void onTabUnselected(int position) {//选中 -> 未选中
 
-                switch (position){
-                    default:
-                        break;
-                    case 0:
-                        hideFragment(position);
-                        break;
-                    case 1:
-                        hideFragment(position);
-                        break;
-                    case 2:
-                        hideFragment(position);
-                        break;
-                    case 3:
-                        hideFragment(position);
-                        break;
-                    case 4:
-                        hideFragment(position);
-                        break;
-                }
-
             }
 
             @Override
             public void onTabReselected(int position) {//选中 -> 选中
-                switch (position){
-                    default:
-                        break;
-                    case 0:
-                        showFragment(position);
-                        break;
-                    case 1:
-                        showFragment(position);
-                        break;
-                    case 2:
-                        showFragment(position);
-                        break;
-                    case 3:
-                        showFragment(position);
-                        break;
-                    case 4:
-                        showFragment(position);
-                        break;
-                }
 
             }
         });
