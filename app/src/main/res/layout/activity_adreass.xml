@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shopping.activity.AdreassActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toobar_class"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        android:background="#03A9F4"
+        android:layout_height="@dimen/dp_43">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/sp_20"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_7"
+                android:text="地址管理"
+                android:textColor="#eeeeee"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="@dimen/sp_11"
+                android:text="            "
+                android:gravity="center"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/rcy_address"
+        android:layout_height="@dimen/dp_0"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/dp_15"
+        android:background="#03A9F4"
+        android:id="@+id/but_address"
+        android:textSize="25sp"
+        android:text="添加地址"
+        android:textColor="#ffffff"
+        android:layout_height="@dimen/dp_50"/>
+</LinearLayout>

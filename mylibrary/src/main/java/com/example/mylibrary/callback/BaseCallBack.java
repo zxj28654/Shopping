@@ -14,14 +14,14 @@ public abstract class BaseCallBack<T> extends BaseObserver{
         Log.e("liangxq", "onNext:111"+t.toString() );
         //返回的是个json串
         T parse = parse((String) t);
-        Log.e("liangxq", "onNext:222"+parse.toString() );
+     //   Log.e("liangxq", "onNext:222"+parse.toString() );
         if(callSuccess&&isCodeSuccess()){
             onSuccess(parse);
         }
     }
     //将JsonElement转换为Response，并且通过子类的实现来获取data数据
     protected abstract T onConvert(String result);
-    //
+    // 
     public T parse(String result){
         T data=null;
         try{

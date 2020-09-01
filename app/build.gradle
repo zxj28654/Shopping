@@ -5,17 +5,24 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.example.shopping"
-        minSdkVersion 23
+        applicationId "com.example.liangxq.shopping"
+        minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         ndk {
             // 设置支持的SO库架构
-            abiFilters 'x86' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'//armeabi
+            abiFilters 'armeabi-v7a'// 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'//armeabi
         }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //极光推送
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: "com.example.liangxq.shopping",
+                JPUSH_APPKEY : "168bc3ce15b62b3fa2eb9721", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
 
 
@@ -45,7 +52,7 @@ dependencies {
     implementation project(path: ':mylibrary')
     implementation project(path: ':mvplibrary')
     // implementation project(path: ':libumengsharelogin')
-    //  implementation 'com.android.support:design:30.+'
+      implementation 'com.android.support:design:30.+'
     // implementation 'com.github.bumptech.glide:glide:4.8.0'
 
     api 'com.jakewharton:butterknife:10.0.0'
@@ -60,6 +67,9 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 
+//极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.7.0'  // 此处以JPush 3.7.0 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.4.2'  // 此处以JCore 2.4.2 版本为例。
 
 // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
     api 'com.umeng.umsdk:common:9.1.0'
@@ -83,9 +93,15 @@ dependencies {
     // api   'com.github.poqiao:BeveLabelView:1.0.3'
     api 'com.github.shts:TriangleLabelView:1.1.2'
     //画廊
-    api 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
-    api 'q.rorbin:VerticalTabLayout:1.2.5'
+    implementation 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
+    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
 
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    //选择弹窗
+    compile 'com.bigkoo:alertview:1.0.3'
+
+    //相册选择框架
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
 }

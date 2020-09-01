@@ -16,16 +16,16 @@ public abstract class LoginHttpCallBack<T> extends BaseCallBack<T> {
     protected T onConvert(String result) {
         T t=null;
         mGoodsClassBeanParent = new Gson().fromJson(result, LoginBean.class);
-        int status = mGoodsClassBeanParent.getStatus();
 
+        int status = mGoodsClassBeanParent.getStatus();
+        String errorMsg = mGoodsClassBeanParent.getMessage();
+        JsonElement data = mGoodsClassBeanParent.getData();
         switch (status) {
             case -1:
-                String errorMsg = mGoodsClassBeanParent.getMessage();
                 onError(errorMsg,status);
                 break;
             default:
                 if (isCodeSuccess()) {
-                    JsonElement data = mGoodsClassBeanParent.getData();
                     t=convert(data);
                 }
                 break;

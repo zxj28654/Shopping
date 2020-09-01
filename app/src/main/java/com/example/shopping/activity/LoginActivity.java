@@ -1,6 +1,7 @@
 package com.example.shopping.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,8 +18,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.mvplibrary.base.BaseMvpActivity;
 import com.example.shopping.R;
+import com.example.shopping.evenbus.OnGetNews;
 import com.example.shopping.mvp.login.LoginPresenter;
 import com.example.shopping.mvp.login.LoginView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +43,7 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
     TextView wangjipsw;
     @BindView(R.id.create)
     TextView create;
+
 
     @Override
     protected void initData() {
@@ -94,8 +100,13 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
     }
 
     @Override
-    public void setStri(String sri) {
+    public void setStri(String sri,String string) {
         Toast.makeText(this, sri, Toast.LENGTH_SHORT).show();
+        Intent name = getIntent().putExtra("name", sri);
+        setResult(200,name);
+        EventBus.getDefault().post(new OnGetNews());
+        finish();
+
     }
 
     @Override
@@ -113,6 +124,8 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
         }
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
+
+
     }
 
     @Override

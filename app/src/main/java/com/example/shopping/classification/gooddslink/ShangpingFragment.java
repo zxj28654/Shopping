@@ -2,6 +2,7 @@ package com.example.shopping.classification.gooddslink;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.media.RatingCompat;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +34,7 @@ import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -68,6 +72,7 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
     private ArrayList<String> mStrings;
     private ArrayList<String> mList;
     private ArrayList<String> mList1;
+
 
     public ShangpingFragment(int id) {
         this.id = id;
@@ -129,6 +134,9 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
 
         ArrayList<TextView> list = new ArrayList<>();
         ArrayList<TextView> lists = new ArrayList<>();
+        ArrayList<TextView> retu = new ArrayList<>();
+        ArrayList<TextView> retu1 = new ArrayList<>();
+
         View view = LayoutInflater.from(context).inflate(R.layout.popwindor_link, null);
         View viewById = view.findViewById(R.id.pop_close);
         ImageView touxiang = (ImageView) view.findViewById(R.id.iv_pop_tou);
@@ -144,11 +152,11 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
         jian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int i = Integer.parseInt(jia.getText().toString());
+                int i = Integer.parseInt(shu.getText().toString());
                 if (i==1){
 
                 }else {
-                    i--;
+                    i=i-1;
                     shu.setText(i+"");
                 }
             }
@@ -157,8 +165,8 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
         jia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int i = Integer.parseInt(jia.getText().toString());
-                i++;
+                int i = Integer.parseInt(shu.getText().toString());
+                i=i+1;
                 shu.setText(i+"");
             }
         });
@@ -182,10 +190,12 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
                     views.setTag("1");
                     for (TextView v:list) {
                         if ((String)v.getTag()=="1"){
-                            v.setTextColor(Color.BLUE);
+                            v.setTextColor(Color.RED);
                             v.setTag(null);
+                           retu.add(v);
                         }else {
                             v.setTextColor(Color.BLACK);
+                           retu.remove(v);
                         }
                     }
                 }
@@ -218,10 +228,12 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
                         viewl.setTag("1");
                         for (TextView v:lists) {
                             if ((String)v.getTag()=="1"){
-                                v.setTextColor(Color.BLUE);
+                                v.setTextColor(Color.RED);
                                 v.setTag(null);
+                                retu1.add(v);
                             }else {
                                 v.setTextColor(Color.BLACK);
+                                retu1.remove(v);
                             }
                         }
 
@@ -253,6 +265,44 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
                 popupWindow.dismiss();
             }
         });
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                StringBuffer buffer=new StringBuffer();
+                for (TextView tv:retu) {
+
+                    buffer.append(tv.getText().toString()+"/");
+
+                }
+                for (TextView tv:retu1) {
+                    buffer.append(tv.getText().toString()+",");
+
+                }
+
+                if (retu.size()<=0 && retu1.size()<=0){
+                    //切割字符串取出要用的部分
+                    //String defaultSku = mBean.getGoodsDefaultSku();
+                    buffer.append(mBean.getGoodsDefaultSku()).append(shu.getText().toString()+"件");
+                    EventBus.getDefault().post(buffer.toString());
+                }else if (retu.size()<0){
+                    for (TextView tv:retu1) {
+                        buffer.append(tv.getText().toString()+",").append(shu.getText().toString()+"件");
+                    }
+                    EventBus.getDefault().post(buffer.toString());
+
+                }else if (retu1.size()<0){
+                    for (TextView tv:retu) {
+                        buffer.append(tv.getText().toString()+"/").append(shu.getText().toString()+"件");
+                    }
+                    EventBus.getDefault().post(buffer.toString());
+                }else {
+                    buffer.append(shu.getText().toString()+"件");
+                    EventBus.getDefault().post(buffer.toString());
+                }
+
+            }
+        });
     }
 
     @Override
@@ -277,5 +327,26 @@ public class ShangpingFragment extends BaseMvpFragment<LinkView, LinkPresenter> 
     @Override
     public void showToast(String string) {
         Toast.makeText(mActivity, string, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+    @Subscribe
+    public void SetTvx(String string){
+        if (string!=null){
+            tvx.setText(string);
+            string=null;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+      EventBus.getDefault().unregister(this);
+
     }
 }

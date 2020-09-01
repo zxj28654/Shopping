@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shopping.fragment.DingdanFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/rcy_Dingdan"
+        android:layout_height="wrap_content"/>
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_centerInParent="true"
+        android:id="@+id/tv_dingdan"
+        android:layout_width="wrap_content"
+        android:textSize="25sp"
+        android:layout_height="wrap_content"
+        android:text="敬请期待~~~" />
+
+</RelativeLayout>

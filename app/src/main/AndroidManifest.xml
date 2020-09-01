@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.shopping">
-
+    <!--调用相机权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -22,7 +23,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CreateActivity"></activity>
+        <activity android:name=".activity.DingDanActivity"></activity>
+        <activity android:name=".activity.AdreassActivity" />
+        <activity android:name=".activity.MyCenterActivity" >
+
+        </activity>
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.CreateActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".GoodsLinkActivity" />
         <activity android:name=".GoodsActivity" />
@@ -32,7 +39,50 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- 极光推送广播的配置 -->
+        <receiver
+            android:name=".receiver.JPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
+                <category android:name="com.example.liangxq.shopping" />
+            </intent-filter>
+        </receiver> <!-- &lt;!&ndash;极光推送广播的配置&ndash;&gt; -->
+        <!-- <service android:name=".service.JPushService" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="false" -->
+        <!-- android:process=":pushcore"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="cn.jiguang.user.service.action" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <receiver
+            android:name=".receiver.ShoppingReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+
+                <category android:name="com.example.liangxq.shopping" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.shopping.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

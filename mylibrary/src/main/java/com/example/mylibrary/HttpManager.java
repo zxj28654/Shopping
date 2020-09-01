@@ -73,10 +73,11 @@ public class HttpManager {
             builder.addInterceptor(interceptor);
         }
         ArrayList<Interceptor> interceptors1 = HttpGlobaConfig.getInstance().getInterceptors();
-        for (Interceptor interceptor: interceptors) {
-            builder.addInterceptor(interceptor);
+        if (interceptors1!=null){
+            for (Interceptor interceptor: interceptors1) {
+                builder.addInterceptor(interceptor);
+            }
         }
-
         return builder.build();
     }
 }

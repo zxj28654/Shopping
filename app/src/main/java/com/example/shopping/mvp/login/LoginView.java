@@ -7,6 +7,6 @@ public interface LoginView extends BaseView {
     String getPsw();
     String getRepsw();
     String getYanZen();
-    void setStri(String sri);
+    void setStri(String sri,String string);
 
 }

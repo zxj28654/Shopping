@@ -40,4 +40,12 @@ public class LoginBean {
     }
 
 
+    @Override
+    public String toString() {
+        return "LoginBean{" +
+                "status=" + status +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

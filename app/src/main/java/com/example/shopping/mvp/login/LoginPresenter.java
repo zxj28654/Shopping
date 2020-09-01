@@ -1,5 +1,6 @@
 package com.example.shopping.mvp.login;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.widget.TextView;
 
@@ -8,8 +9,8 @@ import com.example.mvplibrary.presenter.BasePresenter;
 
 public class LoginPresenter extends BasePresenter<LoginView> implements LoginCallback {
     @Override
-    public void onSucceet(String str) {
-    mView.setStri(str);
+    public void onSucceet(String str,String string) {
+    mView.setStri(str,string);
     }
 
     @Override

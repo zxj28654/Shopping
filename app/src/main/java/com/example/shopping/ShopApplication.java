@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.example.mylibrary.HttpConstant;
 import com.example.mylibrary.HttpGlobaConfig;
+import com.example.mylibrary.ResponseInterceper;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
@@ -14,14 +15,30 @@ import com.umeng.commonsdk.UMConfigure;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import cn.jpush.android.api.JPushInterface;
+import okhttp3.Interceptor;
 
 public class ShopApplication extends Application {
+
+   public static ShopApplication mShopApplicatio;
+
+
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();
+        //极光推送的初始化
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+        ArrayList<Interceptor> interceptors1 = new ArrayList<>();
+        interceptors1.add(new ResponseInterceper());
         HttpGlobaConfig.getInstance()
+       .setInterceptors(interceptors1)
                  .setBaseUrl("http://169.254.189.205:8080/kotlin/")
-              //  .setBaseUrl("http://apie.ergedd.com/")
                 .setTimeOut(HttpConstant.TIME_OUT)
                 .setShowLog(true)
                 .setTimeUnit(HttpConstant.TIME_UNIT)

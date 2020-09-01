@@ -12,11 +12,13 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import okhttp3.Interceptor;
 import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 
@@ -56,6 +58,7 @@ public class HttpClient {
     BaseCallBack baseCallBack;
     //订阅关系的标签
     String tag;
+    //
 
     public HttpClient(Builder builder) {
         this.method = builder.method;
@@ -91,6 +94,7 @@ public class HttpClient {
         addPramaers();
         //添加头信息
         addHeadrs();
+        //
         Observable observable = createObservable();
         HttpObserable httpObserable = new HttpObserable.Buidler(observable)
                 .setActivityEvent(activityEvent)
@@ -99,6 +103,7 @@ public class HttpClient {
                 .build();
         httpObserable.observer().subscribe(baseCallBack);
     }
+
 
     //添加公共头信息
     private void addHeadrs() {
@@ -120,6 +125,7 @@ public class HttpClient {
             paramser.putAll(HttpGlobaConfig.getInstance().getBaseparams());
         }
     }
+
 
     //创建Observable
     private Observable createObservable() {
@@ -200,6 +206,8 @@ public class HttpClient {
         TimeUnit timeUnit;
         //订阅的标签
         String tag;
+        //
+        Interceptor mInterceptor;
 
 
         public Builder setTag(String tag) {
@@ -229,7 +237,6 @@ public class HttpClient {
 
         public Builder() {
         }
-
 
         //设置参数的拼接
         public Builder setParamser(Map<String, Object> paramser) {
